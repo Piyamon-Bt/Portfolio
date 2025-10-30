@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Code, Briefcase, User, MessageSquare } from 'lucide-react';
+import character from '@/assets/image/character.png';
+
+
+
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -187,7 +191,7 @@ export default function Portfolio() {
             {/* ฝั่งซ้าย: รูป */}
             <div className="w-full md:w-1/2 flex justify-center">
               <img
-                src="src/assets/image/character.png"
+                src={character}
                 alt="Profile"
                 className="w-[2400px] max-w-md object-cover rounded-xl animate-bounce"
               />
