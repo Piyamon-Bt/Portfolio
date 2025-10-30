@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Code, Briefcase, User, MessageSquare } from 'lucide-react';
-import character from '@/assets/image/character.png';
 
 
 
@@ -191,7 +190,7 @@ export default function Portfolio() {
             {/* ฝั่งซ้าย: รูป */}
             <div className="w-full md:w-1/2 flex justify-center">
               <img
-                src={character}
+                src="/image/character.png"
                 alt="Profile"
                 className="w-[2400px] max-w-md object-cover rounded-xl animate-bounce"
               />
@@ -225,7 +224,7 @@ export default function Portfolio() {
             {/* Card 1 */}
             <div className="rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-black p-6 flex gap-6">
               <img
-                src="src/assets/image/India.jpeg"
+                src="/image/India.jpeg"
                 alt="India Workshop"
                 className="w-48 h-36 object-cover rounded-xl flex-shrink-0"
               />
@@ -251,7 +250,7 @@ export default function Portfolio() {
             {/* Card 2 */}
             <div className="rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-black p-6 flex gap-6">
               <img
-                src="src/assets/image/icp.jpeg"
+                src="/image/icp.jpeg"
                 alt="India Workshop"
                 className="w-48 h-36 object-cover rounded-xl flex-shrink-0"
               />
@@ -270,7 +269,7 @@ export default function Portfolio() {
             {/* Card 3 */}
             <div className="rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-black p-6 flex gap-6">
               <img
-                src="src/assets/image/engineer.jpeg"
+                src="/image/engineer.jpeg"
                 alt="India Workshop"
                 className="w-48 h-36 object-cover rounded-xl flex-shrink-0"
               />
@@ -289,7 +288,7 @@ export default function Portfolio() {
             {/* Card 4 */}
             <div className="rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-black p-6 flex gap-6">
               <img
-                src="src/assets/image/intern.jpg"
+                src="/image/intern.jpg"
                 alt="India Workshop"
                 className="w-48 h-36 object-cover rounded-xl flex-shrink-0"
               />
@@ -308,7 +307,7 @@ export default function Portfolio() {
             {/* Card 5 */}
             <div className="rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-black p-6 flex gap-6">
               <img
-                src="src/assets/image/kmutt.png"
+                src="/image/kmutt.png"
                 alt="India Workshop"
                 className="w-48 h-36 object-cover rounded-xl flex-shrink-0"
               />
@@ -373,7 +372,7 @@ export default function Portfolio() {
               <ul className="space-y-4">
                 <li className="flex items-center gap-3">
                   <img
-                    src="src/assets/image/gmail.png"
+                    src="/image/gmail.png"
                     alt="Gmail"
                     className="w-8 h-8"
                   />
@@ -387,7 +386,7 @@ export default function Portfolio() {
 
                 <li className="flex items-center gap-3">
                   <img
-                    src="src/assets/image/linkedin.png"
+                    src="/image/linkedin.png"
                     alt="LinkedIn"
                     className="w-8 h-8"
                   />
@@ -403,7 +402,7 @@ export default function Portfolio() {
 
                 <li className="flex items-center gap-3">
                   <img
-                    src="src/assets/image/github.png"
+                    src="/image/github.png"
                     alt="GitHub"
                     className="w-8 h-8"
                   />
@@ -418,7 +417,7 @@ export default function Portfolio() {
                 </li>
                 <li className="flex items-center gap-3">
                   <img
-                    src="src/assets/image/gitlab.png"
+                    src="/image/gitlab.png"
                     alt="GitHub"
                     className="w-8 h-8"
                   />
