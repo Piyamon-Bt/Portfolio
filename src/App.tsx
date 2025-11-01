@@ -54,7 +54,7 @@ export default function Portfolio() {
       title: "Language",
       skills: [
         "Thai",
-        "English (665)",
+        "English (TOEIC:665)",
         "Chinese",
       ],
     }
