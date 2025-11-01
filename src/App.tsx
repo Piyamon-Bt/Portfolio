@@ -3,7 +3,6 @@ import { Menu, X, Code, Briefcase, User, MessageSquare } from 'lucide-react';
 
 
 
-
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
@@ -95,7 +94,6 @@ export default function Portfolio() {
     { id: 'about', label: 'About', icon: User },
     { id: 'activity', label: 'Activity', icon: Briefcase },
     { id: 'skills', label: 'Skills', icon: Code },
-    // { id: 'project', label: 'Design', icon: MessageSquare },
     { id: 'contact', label: 'Contact', icon: MessageSquare },
   ];
 
@@ -127,7 +125,7 @@ export default function Portfolio() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-gray-300"
+              className="md:hidden text-black"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -137,7 +135,7 @@ export default function Portfolio() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-slate-800/95 backdrop-blur-md">
+          <div className="md:hidden bg-orange-100 backdrop-blur-md">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -146,8 +144,8 @@ export default function Portfolio() {
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
                     className={`w-full flex items-center space-x-3 px-3 py-2 rounded-md transition-colors duration-300 ${activeSection === item.id
-                      ? 'bg-purple-600 text-white'
-                      : 'text-gray-300 hover:bg-slate-700'
+                      ? 'bg-orange-100 text-red border'
+                      : 'text-black hover:bg-orange-200'
                       }`}
                   >
                     <Icon size={20} />
