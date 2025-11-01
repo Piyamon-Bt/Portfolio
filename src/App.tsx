@@ -194,7 +194,7 @@ export default function Portfolio() {
               />
             </div>
             {/* ฝั่งขวา: ข้อความ */}
-            <div className="w-full md:w-1/2 border rounded-2xl p-8">
+            <div className="w-full md:w-1/2 rounded-2xl p-8">
               <p className="text-black text-lg leading-relaxed mb-6">
                 I’m a Computer Engineering student passionate about AI, Web Development, and UX/UI Design.
                 I enjoy building practical projects that combine clean code, data-driven logic, and modern UI.
