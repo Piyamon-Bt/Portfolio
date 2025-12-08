@@ -69,7 +69,7 @@ export default function Portfolio() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'activity', 'skills', 'contact'];
+      const sections = ['home', 'about', 'activity', 'skills','project', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -94,6 +94,7 @@ export default function Portfolio() {
     { id: 'about', label: 'About', icon: User },
     { id: 'activity', label: 'Activity', icon: Briefcase },
     { id: 'skills', label: 'Skills', icon: Code },
+    { id: 'project', label: 'Project', icon: Code },
     { id: 'contact', label: 'Contact', icon: MessageSquare },
   ];
 
@@ -332,6 +333,39 @@ export default function Portfolio() {
         <div className="max-w-6xl w-full">
           <h2 className="text-4xl md:text-5xl font-bold text-black mb-12 text-center">
             <span className="text-black mr-2">✦</span>Skills
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
+            {expertiseData.map((section, index) => (
+              <div
+                key={index}
+                className="rounded-xl p-6 border border-black transition-all duration-300 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-black"
+              >
+                <h3 className="text-xl font-semibold text-black">
+                  {section.title}
+                </h3>
+
+                <ul className="space-y-2 mb-4">
+                  {section.skills.map((skill, skillIndex) => (
+                    <li
+                      key={skillIndex}
+                      className="flex items-center text-black text-sm"
+                    >
+                      <span className="text-black mr-2">✦</span>
+                      <span>{skill}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Project Section */}
+      <section id="project" className="min-h-screen flex items-center justify-center px-4 py-20">
+        <div className="max-w-6xl w-full">
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-12 text-center">
+            <span className="text-black mr-2">✦</span>Project
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
             {expertiseData.map((section, index) => (
