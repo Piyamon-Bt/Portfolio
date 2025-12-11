@@ -406,40 +406,6 @@ export default function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      {/* <section id="skills" className="min-h-screen flex items-center justify-center px-4 py-20">
-        <div className="max-w-6xl w-full">
-          <h2 className="text-4xl md:text-5xl font-bold text-black mb-8 text-center">
-            <span className="text-[#ffe221] mr-2">✦</span>
-            Skills
-            <span className="text-[#ffe221] ml-2">✦</span>
-          </h2>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {expertiseData.map((section, index) => (
-              <div
-                key={index}
-                className="rounded-xl p-6 border border-black transition-all duration-300 rounded-2xl shadow-lg hover:shadow-2xl"
-              >
-                <h3 className="text-xl font-semibold text-black mb-4">
-                  {section.title}
-                </h3>
-
-                <ul className="space-y-2">
-                  {section.skills.map((skill, skillIndex) => (
-                    <li
-                      key={skillIndex}
-                      className="flex items-center text-black text-sm"
-                    >
-                      <span className="text-black mr-2">✦</span>
-                      <span>{skill}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
       <section id="skills" className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-7xl w-full">
           <h2 className="text-4xl md:text-5xl font-bold text-black mb-8 text-center">
