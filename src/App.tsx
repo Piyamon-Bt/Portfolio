@@ -1,7 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Code, Briefcase, User, MessageSquare, ArrowUpRight } from 'lucide-react';
 
-const ProjectCard = ({ title, description, image, isExpanded, onHover, color }) => {
+type ProjectCardProps = {
+  title: string;
+  description: string;
+  image?: string;       // มี ? ถ้าบางทีไม่ส่ง image
+  isExpanded: boolean;
+  onHover: () => void;
+  color: string;
+};
+
+const ProjectCard: React.FC<ProjectCardProps> = ({ title, description, image, isExpanded, onHover, color }) => {
   return (
     <div
       onMouseEnter={onHover}
@@ -57,58 +66,58 @@ export default function Portfolio() {
   const [skillsHoveredIndex, setSkillsHoveredIndex] = useState(0);
 
 
-  const expertiseData = [
-    {
-      title: "FRONT-END",
-      skills: [
-        "HTML",
-        "CSS",
-        "Bootstrap",
-        "Angular"
-      ],
-    },
-    {
-      title: "BACK-END",
-      skills: [
-        "PHP",
-        "Java",
-        "C, C#",
-        "Python",
-        "NEXT.js"
-      ],
-    },
-    {
-      title: "DATABASE",
-      skills: [
-        "MySQL",
-      ],
-    },
-    {
-      title: "TOOLS",
-      skills: [
-        "Figma",
-        "MySQL Workbench",
-        "phpMyAdmin",
-        "Postman",
-        "Unity",
-        "GitHub",
-      ],
-    },
-    {
-      title: "GRAPHIC TOOLS",
-      skills: [
-        "Blender",
-      ],
-    },
-    {
-      title: "Language",
-      skills: [
-        "Thai",
-        "English (TOEIC:665)",
-        "Chinese",
-      ],
-    }
-  ];
+  // const expertiseData = [
+  //   {
+  //     title: "FRONT-END",
+  //     skills: [
+  //       "HTML",
+  //       "CSS",
+  //       "Bootstrap",
+  //       "Angular"
+  //     ],
+  //   },
+  //   {
+  //     title: "BACK-END",
+  //     skills: [
+  //       "PHP",
+  //       "Java",
+  //       "C, C#",
+  //       "Python",
+  //       "NEXT.js"
+  //     ],
+  //   },
+  //   {
+  //     title: "DATABASE",
+  //     skills: [
+  //       "MySQL",
+  //     ],
+  //   },
+  //   {
+  //     title: "TOOLS",
+  //     skills: [
+  //       "Figma",
+  //       "MySQL Workbench",
+  //       "phpMyAdmin",
+  //       "Postman",
+  //       "Unity",
+  //       "GitHub",
+  //     ],
+  //   },
+  //   {
+  //     title: "GRAPHIC TOOLS",
+  //     skills: [
+  //       "Blender",
+  //     ],
+  //   },
+  //   {
+  //     title: "Language",
+  //     skills: [
+  //       "Thai",
+  //       "English (TOEIC:665)",
+  //       "Chinese",
+  //     ],
+  //   }
+  // ];
 
   const projects = [
     {
@@ -152,7 +161,7 @@ export default function Portfolio() {
     },
   ];
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
