@@ -542,8 +542,8 @@ export default function Portfolio() {
             <span className="inline-block animate-pulse ml-3">✦</span>
           </h2>
 
-          <div className="p-8 md:p-2 m-[120px]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
+          <div className="rounded-3xl bg-white/30 backdrop-blur-sm p-6 sm:p-8 md:p-10 lg:p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_0.75fr] gap-10 lg:gap-14">
               {/* LEFT COLUMN */}
               <div className="space-y-10">
                 <div>
