@@ -13,7 +13,6 @@ import {
   Sparkles,
   Calendar,
   Plus,
-  Star,
 } from 'lucide-react';
 
 // ================== Types ==================
@@ -245,19 +244,6 @@ function Timeline({ items }: { items: TimelineItem[] }) {
             {it.subtitle && <div className="text-sm text-gray-600 leading-relaxed whitespace-pre-line">{it.subtitle}</div>}
           </div>
         </div>
-      ))}
-    </div>
-  );
-}
-
-function StarRating({ value }: { value: number }) {
-  return (
-    <div className="flex items-center gap-1">
-      {Array.from({ length: 5 }).map((_, i) => (
-        <Star
-          key={i}
-          className={`w-4 h-4 ${i < value ? 'fill-pink-500 text-pink-500' : 'text-pink-200'}`}
-        />
       ))}
     </div>
   );
