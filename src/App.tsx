@@ -49,12 +49,6 @@ type TimelineItem = {
   subtitle?: string;
 };
 
-type SoftwareItem = {
-  label: string;
-  brand?: string;
-  level: number; // 0-5
-  badge: string; // short text badge
-};
 
 // ================== Card Component ==================
 const Card = ({ title, description, color, isExpanded, onClick, onHover, github }: CardProps) => {
@@ -264,27 +258,6 @@ function StarRating({ value }: { value: number }) {
           key={i}
           className={`w-4 h-4 ${i < value ? 'fill-pink-500 text-pink-500' : 'text-pink-200'}`}
         />
-      ))}
-    </div>
-  );
-}
-
-function SoftwareGrid({ items }: { items: SoftwareItem[] }) {
-  return (
-    <div className="space-y-4">
-      {items.map((s, idx) => (
-        <div key={idx} className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-10 h-10 rounded-xl bg-indigo-900 text-white flex items-center justify-center font-bold">
-              {s.badge}
-            </div>
-            <div className="min-w-0">
-              <div className="text-sm text-gray-500 leading-none">{s.brand ?? ''}</div>
-              <div className="font-semibold text-gray-900 truncate">{s.label}</div>
-            </div>
-          </div>
-          <StarRating value={s.level} />
-        </div>
       ))}
     </div>
   );
