@@ -56,11 +56,6 @@ type SoftwareItem = {
   badge: string; // short text badge
 };
 
-type HobbyItem = {
-  label: string;
-  icon: ReactNode;
-};
-
 // ================== Card Component ==================
 const Card = ({ title, description, color, isExpanded, onClick, onHover, github }: CardProps) => {
   return (
