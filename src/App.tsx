@@ -16,6 +16,11 @@ import {
 } from 'lucide-react';
 
 // ================== Types ==================
+type ActionLink = {
+  label: string;
+  href: string;
+};
+
 type CardProps = {
   title: string;
   description: string;
@@ -24,6 +29,7 @@ type CardProps = {
   onClick?: () => void;
   onHover?: () => void;
   github?: string;
+  actions?: ActionLink[]; // ✅ add
 };
 
 type MobileCardProps = {
@@ -31,6 +37,7 @@ type MobileCardProps = {
   description: string;
   color: string;
   github?: string;
+  actions?: ActionLink[]; // ✅ add
 };
 
 type ActivityCardProps = {
@@ -48,15 +55,15 @@ type TimelineItem = {
   subtitle?: string;
 };
 
-
 // ================== Card Component ==================
-const Card = ({ title, description, color, isExpanded, onClick, onHover, github }: CardProps) => {
+const Card = ({ title, description, color, isExpanded, onClick, onHover, github, actions }: CardProps) => {
   return (
     <div
       onMouseEnter={onHover}
       onClick={onClick}
-      className={`rounded-3xl p-8 transition-all duration-700 ease-out cursor-pointer relative overflow-hidden ${isExpanded ? 'shadow-2xl scale-105' : 'shadow-lg hover:shadow-xl hover:scale-105'
-        }`}
+      className={`rounded-3xl p-8 transition-all duration-700 ease-out cursor-pointer relative overflow-hidden ${
+        isExpanded ? 'shadow-2xl scale-105' : 'shadow-lg hover:shadow-xl hover:scale-105'
+      }`}
       style={{
         backgroundColor: isExpanded ? 'white' : color,
         minHeight: '420px',
@@ -66,44 +73,69 @@ const Card = ({ title, description, color, isExpanded, onClick, onHover, github 
       <div className="flex flex-col h-full justify-between">
         <div>
           <h3
-            className={`text-2xl font-bold mb-4 transition-all duration-500 ${isExpanded ? 'text-gray-900' : 'text-gray-800'
-              }`}
+            className={`text-2xl font-bold mb-4 transition-all duration-500 ${
+              isExpanded ? 'text-gray-900' : 'text-gray-800'
+            }`}
           >
             {title}
           </h3>
 
           <div
-            className={`text-gray-600 transition-all duration-700 whitespace-pre-line ${isExpanded ? 'opacity-100 max-h-[300px] overflow-y-auto pr-2' : 'opacity-0 max-h-0 overflow-hidden'
-              }`}
+            className={`text-gray-600 transition-all duration-700 whitespace-pre-line ${
+              isExpanded ? 'opacity-100 max-h-[300px] overflow-y-auto pr-2' : 'opacity-0 max-h-0 overflow-hidden'
+            }`}
           >
             {description}
           </div>
         </div>
 
-        <div className="flex items-center justify-between mt-6">
-          {github && isExpanded ? (
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-gray-700 to-gray-900 px-4 py-2 text-white rounded-full font-semibold hover:shadow-lg transition-all duration-300 text-sm hover:gap-3"
-            >
-              <Github size={16} />
-              View Code
-            </a>
-          ) : (
-            <span
-              className={`font-semibold text-sm transition-all duration-500 ${isExpanded ? 'text-orange-500' : 'text-gray-700'
+        <div className="flex items-end justify-between mt-6 gap-3">
+          {/* LEFT: Actions (Languages card) OR Github button OR Expanded/Collapsed text */}
+          <div className="flex-1">
+            {actions?.length && isExpanded ? (
+              <div className="flex flex-wrap gap-2">
+                {actions.map((a) => (
+                  <a
+                    key={a.label}
+                    href={a.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white
+                               bg-gradient-to-r from-orange-400 to-pink-500 hover:shadow-lg transition-all duration-300"
+                  >
+                    <ExternalLink size={16} />
+                    {a.label}
+                  </a>
+                ))}
+              </div>
+            ) : github && isExpanded ? (
+              <a
+                href={github}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-2 bg-gradient-to-r from-gray-700 to-gray-900 px-4 py-2 text-white rounded-full font-semibold hover:shadow-lg transition-all duration-300 text-sm hover:gap-3"
+              >
+                <Github size={16} />
+                View Code
+              </a>
+            ) : (
+              <span
+                className={`font-semibold text-sm transition-all duration-500 ${
+                  isExpanded ? 'text-orange-500' : 'text-gray-700'
                 }`}
-            >
-              {isExpanded ? '✓ Expanded' : 'View Details'}
-            </span>
-          )}
+              >
+                {isExpanded ? '✓ Expanded' : 'View Details'}
+              </span>
+            )}
+          </div>
 
+          {/* RIGHT: Sparkles icon */}
           <div
-            className={`rounded-full p-2.5 transition-all duration-500 ${isExpanded ? 'bg-gradient-to-r from-orange-400 to-pink-500 rotate-45' : 'bg-white/80 hover:bg-white'
-              }`}
+            className={`rounded-full p-2.5 transition-all duration-500 ${
+              isExpanded ? 'bg-gradient-to-r from-orange-400 to-pink-500 rotate-45' : 'bg-white/80 hover:bg-white'
+            }`}
           >
             <Sparkles className={`w-5 h-5 ${isExpanded ? 'text-white' : 'text-gray-700'}`} />
           </div>
@@ -114,7 +146,7 @@ const Card = ({ title, description, color, isExpanded, onClick, onHover, github 
 };
 
 // ================== Mobile Card ==================
-const MobileCard = ({ title, description, color, github }: MobileCardProps) => {
+const MobileCard = ({ title, description, color, github, actions }: MobileCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -126,11 +158,32 @@ const MobileCard = ({ title, description, color, github }: MobileCardProps) => {
       <h3 className="text-xl font-bold mb-3 text-gray-900">{title}</h3>
 
       <div
-        className={`text-gray-600 text-sm whitespace-pre-line transition-all duration-500 ${isOpen ? 'max-h-96 opacity-100 mt-3' : 'max-h-0 opacity-0 overflow-hidden'
-          }`}
+        className={`text-gray-600 text-sm whitespace-pre-line transition-all duration-500 ${
+          isOpen ? 'max-h-96 opacity-100 mt-3' : 'max-h-0 opacity-0 overflow-hidden'
+        }`}
       >
         {description}
       </div>
+
+      {/* ✅ Actions for Languages (mobile) */}
+      {actions?.length && isOpen && (
+        <div className="flex flex-wrap gap-2 mt-4">
+          {actions.map((a) => (
+            <a
+              key={a.label}
+              href={a.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold text-white
+                         bg-gradient-to-r from-orange-400 to-pink-500 hover:shadow-lg transition-all duration-300"
+            >
+              <ExternalLink size={16} />
+              {a.label}
+            </a>
+          ))}
+        </div>
+      )}
 
       {github && isOpen && (
         <a
@@ -162,16 +215,15 @@ const ActivityCard = ({ image, title, description, link, color, date }: Activity
       onMouseLeave={() => setIsHovered(false)}
       className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 bg-white"
     >
-      {/* Certificate-style decorative corners */}
       <div className="absolute top-0 left-0 w-16 h-16 border-t-4 border-l-4 border-orange-300 opacity-30 rounded-tl-3xl" />
       <div className="absolute top-0 right-0 w-16 h-16 border-t-4 border-r-4 border-pink-300 opacity-30 rounded-tr-3xl" />
       <div className="absolute bottom-0 left-0 w-16 h-16 border-b-4 border-l-4 border-orange-300 opacity-30 rounded-bl-3xl" />
-      <div className="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-pink-300 opacity-30 rounded-br-3xl" />
+      <div className="absolute bottom-0 right-0 w-16 h-16 border-b-4 border-r-4 border-orange-300 opacity-30 rounded-br-3xl" />
 
-      {/* Decorative sparkles */}
       <div
-        className={`absolute top-4 right-4 transition-all duration-500 ${isHovered ? 'scale-125 rotate-12' : 'scale-100'
-          }`}
+        className={`absolute top-4 right-4 transition-all duration-500 ${
+          isHovered ? 'scale-125 rotate-12' : 'scale-100'
+        }`}
       >
         <Sparkles className="w-5 h-5 text-orange-400" />
       </div>
@@ -187,7 +239,6 @@ const ActivityCard = ({ image, title, description, link, color, date }: Activity
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
-        {/* Event date badge (hover -> show date) */}
         <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-2 shadow-lg">
           <Calendar className="w-4 h-4 text-orange-500" />
           <span className="text-xs font-semibold text-gray-700 transition-all duration-300">
@@ -223,11 +274,7 @@ const ActivityCard = ({ image, title, description, link, color, date }: Activity
 
 // ================== About (CV Style) Helpers ==================
 function SectionTitle({ children }: { children: ReactNode }) {
-  return (
-    <h3 className="text-2xl md:text-3xl font-extrabold tracking-wide text-black uppercase">
-      {children}
-    </h3>
-  );
+  return <h3 className="text-2xl md:text-3xl font-extrabold tracking-wide text-black uppercase">{children}</h3>;
 }
 
 function Timeline({ items }: { items: TimelineItem[] }) {
@@ -294,10 +341,15 @@ export default function Portfolio() {
     },
     {
       title: 'Image Processing Self-Study',
-      description:
-        'Studied core image processing concepts and implemented basic techniques using NumPy, OpenCV, Pillow, and Matplotlib.',
+      description: 'Studied core image processing concepts and implemented basic techniques using NumPy, OpenCV, Pillow, and Matplotlib.',
       color: '#FFF5E0',
       github: 'https://github.com/Piyamon-Bt/image-processing-study.git',
+    },
+    {
+      title: 'Forecasting Inflation',
+      description: 'Academic project about time series analysis  focused on forecasting Global Inflation using prophet',
+      color: '#E8FFE8',
+      github: 'https://github.com/FolkJustSleep/ForecastingInflation.git',
     },
   ];
 
@@ -311,8 +363,13 @@ export default function Portfolio() {
     {
       title: 'Languages',
       description:
-        'English: Professional working proficiency\n• TOEIC Score: 665\n• Technical documentation\n• Business communication\n\nChinese: HSK Level 4\n• Reading and writing\n• Basic conversation\n• Cultural understanding',
+        'English: Professional working proficiency\n• TOEIC Score: 790/990\n• Technical documentation\n• Business communication\n\nChinese: HSK Level 4 268/300\n• Reading and writing\n• Basic conversation\n• Cultural understanding',
       color: '#E0F2FF',
+      // only this card has action buttons at bottom
+      actions: [
+        { label: 'TOEIC', href: 'https://drive.google.com/file/d/17gYroiU-uFfMOB5vPBQ2kR2vz2sJ_mfL/view?usp=drivesdk' },
+        { label: 'HSK', href: 'https://drive.google.com/file/d/1XMughWgtVvYAMmRSda-uZAYRS4XEWwVP/view?usp=drivesdk' },
+      ],
     },
     {
       title: 'Soft Skills',
@@ -333,8 +390,7 @@ export default function Portfolio() {
     {
       image: '/image/icp.jpeg',
       title: 'Chain Fusion Event at FYI Center',
-      description:
-        'Attended blockchain workshop arranged by ICP, developing foundational understanding of blockchain concepts',
+      description: 'Attended blockchain workshop arranged by ICP, developing foundational understanding of blockchain concepts',
       color: '#E0F2FF',
       date: 'November 2024',
     },
@@ -372,34 +428,22 @@ export default function Portfolio() {
 
   // ===== About CV-style data =====
   const education: TimelineItem[] = [
-    {
-      period: '2013 - 2022',
-      title: 'Saint Joseph Bangna School (SJB)',
-      subtitle: 'English Program, Science-Math',
-    },
-    {
-      period: '2023 - Present',
-      title: 'Srinakharinwirot University (SWU)',
-      subtitle: 'Engineering, Computer Engineering',
-    },
+    { period: '2013 - 2022', title: 'Saint Joseph Bangna School (SJB)', subtitle: 'English Program, Science-Math' },
+    { period: '2023 - Present', title: 'Srinakharinwirot University (SWU)', subtitle: 'Engineering, Computer Engineering' },
   ];
 
   const experience: TimelineItem[] = [
-    {
-      period: 'May - Jul 2024',
-      title: 'Ananda Development Internship',
-      subtitle: 'IT department internship at FYI Center\nC# backend services + Angular frontend',
-    },
+    { period: 'May - Jul 2024', title: 'Ananda Development Internship', subtitle: 'IT department internship at FYI Center\nC# backend services + Angular frontend' },
   ];
 
- const position: TimelineItem[] = [
-  { period: '', title: 'AI Engineer' },
-  { period: '', title: 'Software Engineer' },
-  { period: '', title: 'DevOps' },
-  { period: '', title: 'Full Stack Developer' },
-  { period: '', title: 'Data Analyst' },
-  { period: '', title: 'Data Scientist' },
-];
+  const position: TimelineItem[] = [
+    { period: '', title: 'AI Engineer' },
+    { period: '', title: 'Software Engineer' },
+    { period: '', title: 'DevOps' },
+    { period: '', title: 'Full Stack Developer' },
+    { period: '', title: 'Data Analyst' },
+    { period: '', title: 'Data Scientist' },
+  ];
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -441,7 +485,6 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-blue-50 via-purple-50 to-orange-50">
-      {/* ✅ Vite ใช้ <style> ไม่ใช้ <style jsx> */}
       <style>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
@@ -461,8 +504,9 @@ export default function Portfolio() {
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`transition-all duration-300 font-medium relative ${activeSection === item.id ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
-                    }`}
+                  className={`transition-all duration-300 font-medium relative ${
+                    activeSection === item.id ? 'text-gray-900' : 'text-gray-600 hover:text-gray-900'
+                  }`}
                 >
                   {item.label}
                   {activeSection === item.id && (
@@ -492,10 +536,11 @@ export default function Portfolio() {
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors duration-300 ${activeSection === item.id
+                    className={`w-full flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors duration-300 ${
+                      activeSection === item.id
                         ? 'bg-gradient-to-r from-orange-50 to-pink-50 text-gray-900'
                         : 'text-gray-600 hover:bg-gray-50'
-                      }`}
+                    }`}
                   >
                     <Icon size={20} />
                     <span>{item.label}</span>
@@ -533,7 +578,7 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* ✅ About Section (CV Style like your image) */}
+      {/* About Section */}
       <section id="about" className="min-h-screen flex items-center justify-center px-4 py-20">
         <div className="max-w-7xl w-full">
           <h2 className="text-5xl md:text-6xl font-bold text-gray-900 mb-12 text-center">
@@ -544,7 +589,6 @@ export default function Portfolio() {
 
           <div className="rounded-3xl backdrop-blur-sm p-6 sm:p-8 md:p-10 lg:p-12">
             <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_0.75fr] gap-10 lg:gap-14">
-              {/* LEFT COLUMN */}
               <div className="space-y-10">
                 <div>
                   <SectionTitle>EDUCATION</SectionTitle>
@@ -561,7 +605,6 @@ export default function Portfolio() {
                 </div>
               </div>
 
-              {/* RIGHT COLUMN */}
               <div className="flex justify-center space-y-10 ml-auto ">
                 <div>
                   <SectionTitle>Target Position</SectionTitle>
@@ -569,21 +612,7 @@ export default function Portfolio() {
                     <Timeline items={position} />
                   </div>
                 </div>
-                {/* <div>
-                  <SectionTitle>HOBBIES</SectionTitle>
-                  <div className="mt-5 grid grid-cols-2 sm:grid-cols-3 gap-6">
-                    {hobbies.map((h, idx) => (
-                      <div key={idx} className="text-center">
-                        <div className="mx-auto w-16 h-16 flex items-center justify-center">
-                          {h.icon}
-                        </div>
-                        <div className="mt-2 text-sm font-semibold text-indigo-900">{h.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div> */}
               </div>
-              {/* END RIGHT */}
             </div>
           </div>
         </div>
@@ -632,6 +661,7 @@ export default function Portfolio() {
                 color={item.color}
                 isExpanded={skillIndex === index}
                 onHover={() => setSkillIndex(index)}
+                actions={(item as any).actions} // ✅ only Languages has actions
               />
             ))}
           </div>
@@ -639,7 +669,13 @@ export default function Portfolio() {
           {/* Mobile */}
           <div className="md:hidden grid grid-cols-1 gap-6">
             {skills.map((skill, index) => (
-              <MobileCard key={index} title={skill.title} description={skill.description} color={skill.color} />
+              <MobileCard
+                key={index}
+                title={skill.title}
+                description={skill.description}
+                color={skill.color}
+                actions={(skill as any).actions} // ✅ only Languages has actions
+              />
             ))}
           </div>
         </div>
@@ -671,14 +707,16 @@ export default function Portfolio() {
               ))}
             </div>
 
-            {/* Dots */}
             <div className="flex justify-center gap-2 mt-4">
               {projects.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setProjectIndex(index)}
-                  className={`transition-all duration-300 rounded-full ${projectIndex === index ? 'w-8 h-2 bg-gradient-to-r from-orange-400 to-pink-500' : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
-                    }`}
+                  className={`transition-all duration-300 rounded-full ${
+                    projectIndex === index
+                      ? 'w-8 h-2 bg-gradient-to-r from-orange-400 to-pink-500'
+                      : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
+                  }`}
                 />
               ))}
             </div>
